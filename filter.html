@@ -1,0 +1,129 @@
+<html>
+<head>
+    <title>BseIndia-Filter</title>
+    <script src="C:/Users/lenovo/Desktop/solutions img/Large images/jquery.min.js"></script>
+    <script>
+        $(function() {
+         $("#submitaction").click(function(){
+             if(document.getElementById('sectortype').value == ""){
+                 alert("Select any category")
+             }
+             else if(document.getElementById('sectortype').value == "equity"){
+                document.getElementsByClassName('cont')[0].style.cursor="wait";
+                $.ajax({
+                    url: "https://pythonbse.azurewebsites.net/",
+                    type: 'POST',
+                    data : $('form').serialize(),
+                    dataType :'json',
+                    crossDomain : true,
+                    success: function (data) {
+                        alert(data)
+                        document.getElementsByClassName('cont')[0].style.cursor="unset";
+                        window.location.href = "http://127.0.0.1/templates/displaypage.html"
+                    },
+                    error: function (error) {
+                        alert("Connection lost... please try again")
+                        document.getElementsByClassName('cont')[0].style.cursor="unset";
+                    }
+                });
+             }
+             else if(document.getElementById('sectortype').value == "metf"){
+                document.getElementsByClassName('cont')[0].style.cursor="wait";
+                $.ajax({
+                    url: "http://127.0.0.1:5000/metf",
+                    type: 'POST',
+                    data : $('form').serialize(),
+                    dataType :'json',
+                    crossDomain : true,
+                    success: function (data) {
+                        document.getElementsByClassName('cont')[0].style.cursor="unset";
+                        window.location.href = "C:/Users/lenovo/Desktop/ASP .NET CORE 2/bse/templates/displaypage.html"
+                    },
+                    error: function (error) {
+                        alert("Connection lost... please try again")
+                        document.getElementsByClassName('cont')[0].style.cursor="unset";
+                    }
+                });
+             }
+             else if(document.getElementById('sectortype').value == "manda"){
+                document.getElementsByClassName('cont')[0].style.cursor="wait";
+                $.ajax({
+                    url: "http://127.0.0.1:5000/manda",
+                    type: 'POST',
+                    data : $('form').serialize(),
+                    dataType :'json',
+                    crossDomain : true,
+                    success: function (data) {
+                        document.getElementsByClassName('cont')[0].style.cursor="unset";
+                        window.location.href = "C:/Users/lenovo/Desktop/ASP .NET CORE 2/bse/templates/displaypage.html"
+                    },
+                    error: function (error) {
+                        alert("Connection lost... please try again")
+                        document.getElementsByClassName('cont')[0].style.cursor="unset";
+                    }
+                });
+             }
+             else{
+                document.getElementsByClassName('cont')[0].style.cursor="wait";
+                $.ajax({
+                    url: "http://127.0.0.1:5000/debt",
+                    type: 'POST',
+                    data : $('form').serialize(),
+                    dataType :'json',
+                    crossDomain : true,
+                    success: function (data) {
+                        document.getElementsByClassName('cont')[0].style.cursor="unset";
+                        window.location.href = "C:/Users/lenovo/Desktop/ASP .NET CORE 2/bse/templates/displaypage.html"
+                    },
+                    error: function (error) {
+                        alert("Connection lost... please try again")
+                        document.getElementsByClassName('cont')[0].style.cursor="unset";
+                    }
+                });
+             }
+         });
+        });
+    </script>
+    <style>
+    input[type=text] {
+    width: 40%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border-radius: 20px;
+    text-align: center;
+}
+.drop_down{
+    width: 40%;
+    padding: 12px 20px;
+    margin: 48px 0;
+    box-sizing: border-box;
+    border-radius: 20px;
+    cursor: hand;
+    text-align: center;
+}
+button[type=button] {
+    width: 8%;
+    padding: 8px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+    </style>
+</head>
+<body class="cont" style="cursor: unset;">
+<div>
+<center><br><h1>Filter Options</h1>
+<form  method="POST">
+    <select id="sectortype" name="sectortype" class="drop_down">
+        <option value="">Select</option>
+        <option value="equity">Equity</option>
+        <option value="metf">Mutual Fund / ETF</option>
+        <option value="debt">Debt / Others</option>
+        <option value="manda">M &amp; A</option>
+    </select><br><br>
+    <button type="button" id="submitaction">Click</button>
+</form></center>
+</div>
+</body>
+</html>
